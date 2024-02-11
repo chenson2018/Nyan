@@ -1,10 +1,16 @@
 Require Import Nyan.Theory.Category.
 Open Scope Cat.
 
-Definition monic {Cat: Category} {B C: object} (f: arrow B C) := 
+(* 
+   The object names are chosen to evoke the imagery of (A | A') ~> B ~> (C | C')
+    - monic forces the left arrows to be the same
+    - epic forces the right arrows to be the same
+*)
+
+Definition monic {Cat: Category} {B C: object} (f: B ~> C) := 
   forall A (g h: A ~> B), f ∘ g ≈ f ∘ h -> g ≈ h.
 
-Definition epic {Cat: Category} {A B: object} (f: arrow A B) := 
+Definition epic {Cat: Category} {A B: object} (f: A ~> B) := 
   forall C (g h : B ~> C), g ∘ f ≈ h ∘ f -> g ≈ h.
 
 Section ism_compose.
