@@ -1,4 +1,4 @@
-Require Import Nyan.Category. 
+Require Import Nyan.Theory.Category. 
 Open Scope Cat.
 
 (* The category with reversed arrows *)

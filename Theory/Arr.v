@@ -1,4 +1,4 @@
-Require Import Nyan.Category.
+Require Import Nyan.Theory.Category.
 Open Scope Cat.
 
 Definition relation_pair {X Y: Type} (rX: relation X) (rY: relation Y) : relation (X * Y).

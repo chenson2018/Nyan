@@ -1,7 +1,7 @@
-Require Import Nyan.Category.
-Require Import Nyan.Arr.
-Require Import Nyan.Dual.
-Require Import Nyan.Ism.
+Require Import Nyan.Theory.Category.
+Require Import Nyan.Theory.Arr.
+Require Import Nyan.Theory.Dual.
+Require Import Nyan.Theory.Ism.
 
 #[export] Instance Category_Set : Category := {
   object := Set;

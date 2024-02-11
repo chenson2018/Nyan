@@ -1,4 +1,4 @@
-Require Import Nyan.Category.
+Require Import Nyan.Theory.Category.
 
 Class Poset : Type := {
     poset_X      : Type;
@@ -112,8 +112,6 @@ Qed.
 
 Section category_poset_induced.
   Context (P: Poset).
-
-  Check poset_leq.
 
   (* is this a good notion of poset equality? *)
   Definition Poset_relation_induced : forall A B : poset_X, relation (poset_leq A B) := 

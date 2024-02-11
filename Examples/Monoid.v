@@ -1,4 +1,4 @@
-Require Import Nyan.Category.
+Require Import Nyan.Theory.Category.
 
 Class Monoid : Type := {
   monoid_X        : Type;
@@ -136,7 +136,7 @@ End category_monoid_induced.
 (* Example of epic/monic not just being surjection/injection *)
 
 Require Import Arith.
-Require Import Nyan.Ism.
+Require Import Nyan.Theory.Ism.
 
 #[local] Instance Monoid_N_Plus : Monoid := {
   monoid_X  := nat;
