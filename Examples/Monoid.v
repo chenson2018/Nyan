@@ -26,16 +26,30 @@ Proof.
   - intros. rewrite monoid_homo_pre0, monoid_homo_pre1. reflexivity.
 Defined.    
 
-Definition Monoid_Homomorphism_relation (A B : Monoid) (f g : Monoid_Homomorphism A B) := f.(monoid_homo_f) = g.(monoid_homo_f).
+Definition Monoid_Homomorphism_relation (A B : Monoid) : 
+  (relation (Monoid_Homomorphism A B)).
+Proof.
+  unfold relation.
+  intros f g.
+  destruct f, g.
+  apply (forall x, monoid_homo_f0 x = monoid_homo_f1 x).
+Defined.
 
 Lemma Monoid_Homomorphism_Equivalence : forall A B : Monoid, Equivalence (Monoid_Homomorphism_relation A B).
 Proof.
   intros.
-  constructor.
-  - unfold Reflexive. reflexivity.
-  - unfold Symmetric. intros. symmetry. assumption.
-  - unfold Transitive, Monoid_Homomorphism_relation. intros. rewrite H. assumption.
-Qed.    
+  constructor
+  ; unfold Reflexive, Symmetric, Transitive, Monoid_Homomorphism_relation
+  ; intros
+  ; try destruct x
+  ; try destruct y
+  ; try destruct z
+  ; intros
+  .
+  - reflexivity.
+  - symmetry. apply H.
+  - rewrite H. apply H0.
+Defined.
 
 Lemma Monoid_cat_compose_proper :
   forall A B C : Monoid,
@@ -55,7 +69,8 @@ Proof.
   unfold Monoid_Homomorphism_relation in *.
   simpl in H0, H.
   subst.
-  reflexivity.
+  intros.
+  rewrite H0, H. reflexivity.
 Qed.  
 
 Definition Monoid_id : forall A : Monoid, Monoid_Homomorphism A A.
@@ -113,7 +128,6 @@ Qed.
   assoc    := Monoid_assoc;
 }.
 
-
 (* a category induced by a particuliar monoid *)
 Section category_monoid_induced.
   (* Context makes the typeclasses fields specific to this M *)
@@ -168,10 +182,21 @@ Proof. intros. lia. Qed.
   monoid_homo_pre := N_Z_monoid_homo_pre;
 }.
 
-Lemma Inclusion_N_Z_monic : monic Category_Monoid Monoid_N_Plus Monoid_Z_Plus Inclusion_N_Z.
+
+Lemma Inclusion_N_Z_monic : 
+  monic Category_Monoid Monoid_N_Plus Monoid_Z_Plus Inclusion_N_Z.
 Proof.
-Admitted.
+  unfold monic. simpl.
+  intros A g h H.
+  unfold Monoid_Homomorphism_relation in *.
+  destruct g, h.
+  simpl in *.
+  intros x.
+  specialize H with x.
+  apply Nat2Z.inj in H. assumption.
+Qed.
   
-Lemma Inclusion_N_Z_epic : epic Category_Monoid Monoid_N_Plus Monoid_Z_Plus Inclusion_N_Z.
+Lemma Inclusion_N_Z_epic : 
+  epic Category_Monoid Monoid_N_Plus Monoid_Z_Plus Inclusion_N_Z.
 Proof.
-Admitted.
+Admitted. 

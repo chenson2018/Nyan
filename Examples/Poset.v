@@ -25,16 +25,29 @@ Proof.
   assumption.
 Defined.
 
-Definition Poset_Preserving_relation (A B : Poset) (f g : Poset_Preserving A B) := f.(poset_map) = g.(poset_map).
+Definition Poset_Preserving_relation (A B : Poset) : relation (Poset_Preserving A B).
+Proof.
+  unfold relation.
+  intros f g.
+  destruct f, g.
+  apply (forall x, poset_map0 x = poset_map1 x).
+Defined.
 
 Lemma Poset_Preserving_Equivalence : forall A B : Poset, Equivalence (Poset_Preserving_relation A B).
 Proof.
   intros.
-  constructor.
-  - unfold Reflexive. reflexivity.
-  - unfold Symmetric. intros. symmetry. assumption.
-  - unfold Transitive, Poset_Preserving_relation. intros. rewrite H. assumption.
-Qed.    
+  constructor
+  ; unfold Reflexive, Symmetric, Transitive, Poset_Preserving_relation
+  ; intros
+  ; try destruct x
+  ; try destruct y
+  ; try destruct z
+  ; intros
+  .
+  - reflexivity.
+  - symmetry. apply H.
+  - rewrite H. apply H0.
+Defined.    
 
 Lemma Poset_cat_compose_proper :
   forall A B C : Poset,
@@ -54,7 +67,8 @@ Proof.
   unfold Poset_Preserving_relation in *.
   simpl in H0, H.
   subst.
-  reflexivity.
+  intros.
+  rewrite H0, H. reflexivity.
 Qed.  
 
 Definition Poset_id : forall A : Poset, Poset_Preserving A A.
