@@ -195,8 +195,39 @@ Proof.
   specialize H with x.
   apply Nat2Z.inj in H. assumption.
 Qed.
-  
+
 Lemma Inclusion_N_Z_epic : 
   epic Category_Monoid Monoid_N_Plus Monoid_Z_Plus Inclusion_N_Z.
 Proof.
-Admitted. 
+  unfold epic. simpl.
+  intros C g h.
+  unfold Monoid_Homomorphism_relation in *.
+  destruct g, h.
+  simpl in *.
+  intros H z.
+  destruct C.
+  simpl in *.
+  destruct (0 <=? z)%Z eqn:bound.
+  - apply Zle_bool_imp_le in bound.
+    specialize H with (Z.to_nat z).
+    rewrite Z2Nat.id in H; assumption.
+  - rename monoid_homo_f0 into f.
+    rename monoid_homo_f1 into g.
+    rename monoid_op0 into f_op.
+    rename monoid_id0 into E.
+    replace (f z) with (f_op (f z) E) by (apply monoid_id_right0).
+    rewrite <- monoid_homo_e1.
+    replace 0%Z with (- z + z)%Z by lia.
+    rewrite monoid_homo_pre1.
+    rewrite monoid_assoc0.
+    replace (g (- z)%Z) with (f ((- z))%Z).
+    + rewrite <- monoid_homo_pre0.
+      replace ((z + - z)%Z) with 0%Z by lia.
+      rewrite monoid_homo_e0.
+      apply monoid_id_left0.
+    + assert (0 <= - z)%Z as neg_z_pos by lia.
+      rewrite <- (Z2Nat.id (- z) neg_z_pos) at 1.
+      rewrite H.
+      rewrite (Z2Nat.id _ neg_z_pos).
+      reflexivity.
+Qed.
