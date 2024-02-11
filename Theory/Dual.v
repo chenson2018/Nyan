@@ -1,7 +1,7 @@
 Require Import Nyan.Theory.Category. 
 Open Scope Cat.
 
-(* The category with reversed arrows *)
+(* given a category, the category with reversed arrows *)
 
 Section cat_dual.
   Context (Cat: Category).
