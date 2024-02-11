@@ -183,8 +183,7 @@ Proof. intros. lia. Qed.
 }.
 
 
-Lemma Inclusion_N_Z_monic : 
-  monic Category_Monoid Monoid_N_Plus Monoid_Z_Plus Inclusion_N_Z.
+Lemma Inclusion_N_Z_monic : monic Inclusion_N_Z.
 Proof.
   unfold monic. simpl.
   intros A g h H.
@@ -196,8 +195,7 @@ Proof.
   apply Nat2Z.inj in H. assumption.
 Qed.
 
-Lemma Inclusion_N_Z_epic : 
-  epic Category_Monoid Monoid_N_Plus Monoid_Z_Plus Inclusion_N_Z.
+Lemma Inclusion_N_Z_epic : epic Inclusion_N_Z.
 Proof.
   unfold epic. simpl.
   intros C g h.

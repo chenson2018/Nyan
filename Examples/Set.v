@@ -75,8 +75,7 @@ Definition Category_Dual_Set := Category_Dual Category_Set.
 Definition injective {A B} (f : A -> B) := forall a1 a2, f a1 = f a2 -> a1 = a2.
 Definition surjective {A B} (f : A -> B) := forall b, exists a, f a = b.
 
-Lemma monic_set_inj : forall (B C: Set) (f: B ~> C), 
-  monic Category_Set B C f <-> injective f.
+Lemma monic_set_inj : forall (B C: Set) (f: B ~> C), monic f <-> injective f.
 Proof.
   unfold "~>", monic, injective. 
   simpl.
@@ -93,8 +92,7 @@ Proof.
     apply H_inj, H_monic.
 Qed.
 
-Lemma epic_set_sur : forall (A B: Set) (f: A ~> B), 
-  epic Category_Set A B f <-> surjective f.
+Lemma epic_set_sur : forall (A B: Set) (f: A ~> B), epic f <-> surjective f.
 Proof.
   unfold "~>", epic, surjective.
   simpl.
