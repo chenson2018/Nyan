@@ -12,7 +12,7 @@ My experimentation with defining categories from scratch in Coq.
 - Examples
   + [Set.v](./Examples/Set.v): Coq's `Set` as a category
   + [Poset.v](./Examples/Poset.v): The category **Poset** and posets as categories
-  + [Monoid.v](./Examples/.v): The category **Mon** and monoids as categories  
+  + [Monoid.v](./Examples/Monoid.v): The category **Mon** and monoids as categories  
 
 ## References
 
