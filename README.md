@@ -8,6 +8,7 @@ My experimentation with defining categories from scratch in Coq.
   + [Category.v](./Theory/Category.v): typeclass definition of categories
   + [Arr.v](./Theory/Arr.v): given a category, the category of its arrows
   + [Dual.v](./Theory/Dual.v): given a category, the category with reversed arrows
+  + [Product.v](./Theory/Product.v): product of two categories
   + [Ism.v](./Theory/Ism.v): various types of morphisms
 - Examples
   + [Set.v](./Examples/Set.v): Coq's `Set` as a category
