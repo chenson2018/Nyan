@@ -48,10 +48,17 @@ Section ism_compose.
     assumption.
   Qed.
 
-  Lemma epic_decompose : epic (g ∘ f) -> epic f.
+  Lemma epic_decompose : epic (g ∘ f) -> epic g.
   Proof.
-  Admitted.  
-
+    unfold epic.
+    intros comp_epic.
+    intros O g' h' H.
+    apply comp_epic.
+    repeat rewrite assoc.
+    rewrite H.
+    reflexivity.
+  Qed.
+    
 End ism_compose.
 
 (* making this a class makes cetain statements easier *)
