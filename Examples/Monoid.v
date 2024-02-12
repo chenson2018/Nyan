@@ -3,8 +3,8 @@ Require Import Nyan.Theory.Category.
 Class Monoid : Type := {
   monoid_X        : Type;
   monoid_op       : monoid_X -> monoid_X -> monoid_X;
-  monoid_assoc    : forall x y z, monoid_op x (monoid_op y z) = monoid_op (monoid_op x y) z;
   monoid_id       : monoid_X;
+  monoid_assoc    : forall x y z, monoid_op x (monoid_op y z) = monoid_op (monoid_op x y) z;
   monoid_id_left  : forall x, monoid_op monoid_id x = x;
   monoid_id_right : forall x, monoid_op x monoid_id = x;
 }.
