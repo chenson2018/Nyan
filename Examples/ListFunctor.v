@@ -29,14 +29,19 @@ Proof.
   - apply app_assoc.
   - reflexivity.
   - apply app_nil_r.
-Qed.
+Defined.
 
 (* having trouble with typeclass constructors here... *)
 
 Definition List_Monoid_arrow {A B: Category_Set.(object)} (f: A ~> B) :
   List_Monoid A ~> List_Monoid B.
 Proof.
-Admitted.
+  simpl in *.
+  unfold List_Monoid.
+  apply (Build_Monoid_Homomorphism (List_Monoid A) (List_Monoid B) (@map A B f)); simpl.
+  - reflexivity.
+  - intros. apply map_app.
+Defined.
 
 #[export] Instance Functor_maplist_monoid: 
   Functor Category_Set Category_Monoid.
@@ -49,6 +54,6 @@ Proof.
           (fun S => List_Monoid S)
           (fun A B f => List_Monoid_arrow f)
          ).
-  - admit.
-  - admit.
-Admitted.
+  - simpl. intros. apply map_id.
+  - unfold List_Monoid_arrow. simpl. intros. symmetry. apply map_map.
+Qed.
