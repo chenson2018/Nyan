@@ -18,6 +18,10 @@ Proof.
   ; intros.
   - apply map_id.
   - symmetry. apply map_map.
+  - unfold Proper, respectful.
+    intros.
+    apply map_ext.
+    assumption.
 Defined.
 
 (* then as a functor from Set to Monoid *)
@@ -56,4 +60,10 @@ Proof.
          ).
   - simpl. intros. apply map_id.
   - unfold List_Monoid_arrow. simpl. intros. symmetry. apply map_map.
+  - unfold Proper, respectful.
+    simpl in *.
+    unfold Set_arrow_relation.
+    intros.
+    apply map_ext.
+    assumption.
 Qed.
