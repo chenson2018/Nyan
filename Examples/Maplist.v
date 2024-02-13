@@ -36,8 +36,6 @@ Proof.
   - apply app_nil_r.
 Defined.
 
-(* having trouble with typeclass constructors here... *)
-
 Definition List_Monoid_arrow {A B: Category_Set.(object)} (f: A ~> B) :
   List_Monoid A ~> List_Monoid B.
 Proof.
