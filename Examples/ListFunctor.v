@@ -1,5 +1,6 @@
 Require Import Nyan.Theory.Category.
 Require Import Nyan.Theory.Functor.
+Require Import Nyan.Theory.Ism.
 Require Import Nyan.Examples.Set.
 Require Import Nyan.Examples.Monoid.
 Require Import List.
@@ -67,3 +68,20 @@ Proof.
     apply map_ext.
     assumption.
 Qed.
+
+#[export] Instance Reverse_Natural_Isomorphism : Natural_Isomorphism Functor_maplist Functor_maplist.
+Proof.
+  unfold Functor_maplist.
+  simpl.
+  apply Build_Natural_Isomorphism with (fun A : Set => @rev A).
+  - simpl. unfold Set_arrow_relation.
+    intros A B f xs.
+    apply map_rev.
+  - simpl.
+    intros A. 
+    apply Build_Iso with (@rev A)
+    ; simpl
+    ; unfold Set_arrow_relation
+    ; intro xs
+    ; apply rev_involutive.
+Qed.    
