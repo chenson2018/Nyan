@@ -10,10 +10,13 @@ My experimentation with defining categories from scratch in Coq.
   + [Dual.v](./Theory/Dual.v): given a category, the category with reversed arrows
   + [Product.v](./Theory/Product.v): product of two categories
   + [Ism.v](./Theory/Ism.v): various types of morphisms
+  + [Functor.v](./Theory/Functor.v): functors and natural transformations/isomorphisms
 - Examples
   + [Set.v](./Examples/Set.v): Coq's `Set` as a category
-  + [Poset.v](./Examples/Poset.v): The category **Poset** and posets as categories
-  + [Monoid.v](./Examples/Monoid.v): The category **Mon** and monoids as categories  
+  + [Poset.v](./Examples/Poset.v): the category **Poset** and posets as categories
+  + [Monoid.v](./Examples/Monoid.v): the category **Mon** and monoids as categories
+  + [IdentityFunctor.v](./Examples/IdentityFunctor.v): the identity functor as a natural isomorphism
+  + [Maplist.v](./Examples/Maplist.v): Coq's List.map as a functor, with List.rev as a natural isomorphism
 
 ## References
 
