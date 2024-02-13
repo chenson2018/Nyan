@@ -62,7 +62,7 @@ Proof.
     reflexivity.
 Defined.      
 
-Notation "g ◯  f" := (compose_Functor f g) (at level 40, left associativity): category_scope.
+Notation "g ◯ f" := (compose_Functor f g) (at level 40, left associativity): category_scope.
 
 Class Natural_Transformation {C D: Category} (F G : Functor C D) := {
   eta_t (A : C.(object)): F.(fmap) A ~> G.(fmap) A;
