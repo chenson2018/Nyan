@@ -16,7 +16,7 @@ My experimentation with defining categories from scratch in Coq.
   + [Poset.v](./Examples/Poset.v): the category **Poset** and posets as categories
   + [Monoid.v](./Examples/Monoid.v): the category **Mon** and monoids as categories
   + [IdentityFunctor.v](./Examples/IdentityFunctor.v): the identity functor as a natural isomorphism
-  + [Maplist.v](./Examples/Maplist.v): Coq's List.map as a functor, with List.rev as a natural isomorphism
+  + [ListFunctor.v](./Examples/ListFunctor.v): Coq's List.map as a functor, with List.rev as a natural isomorphism
 
 ## References
 
