@@ -62,7 +62,24 @@ Proof.
     reflexivity.
 Defined.      
 
-Notation "g ◯ f" := (compose_Functor f g) (at level 40, left associativity): category_scope.
+Notation "g ⊚ f" := (compose_Functor f g) (at level 40, left associativity): category_scope.
+
+Lemma Identity_Functor_Proper {Cat: Category} : forall a b : object,
+  Proper (arrow_relation ==> arrow_relation) (fun f : a ~> b => f).
+Proof.
+  intros.
+  unfold Proper, respectful.
+  intros.
+  assumption.
+Defined.
+
+#[export] Instance Identity_Functor (Cat: Category) : Functor Cat Cat := {
+  fmap := fun A => A;
+  fmap_arr:= fun _ _ f => f;
+  functor_id:= fun _ => reflexivity id;
+  functor_compose:= fun _ _ _ _ _ => reflexivity _;
+  fmap_proper:= Identity_Functor_Proper;
+}.
 
 Class Natural_Transformation {C D: Category} (F G : Functor C D) := {
   eta_t (A : C.(object)): F.(fmap) A ~> G.(fmap) A;
@@ -73,4 +90,31 @@ Class Natural_Isomorphism {C D: Category} (F G : Functor C D) := {
   eta_i (A : C.(object)): F.(fmap) A ~> G.(fmap) A;
   nat_iso_comm {A B} (f : A ~> B) : G.(fmap_arr) f ∘ eta_i A ≈ eta_i B ∘ F.(fmap_arr) f;
   eta_i_iso : forall A, Iso (eta_i A)
+}.
+
+#[export] Instance Identity_Natural_Isomorphism (Cat: Category) : 
+  Natural_Isomorphism (Identity_Functor Cat) (Identity_Functor Cat).
+Proof.
+  apply Build_Natural_Isomorphism with (fun _ => id).
+  - intros. simpl.
+    rewrite id_left, id_right.
+    reflexivity.
+  - intros.
+    apply (Build_Iso Cat A A id id)
+    ; rewrite id_left
+    ; reflexivity.
+Qed.
+
+Class Adjunction {C D: Category} (F: Functor C D) (G: Functor D C) := {
+  adjunct_trans : Natural_Transformation (Identity_Functor C) (G ⊚ F);
+  adjunct_comm {X}: 
+      sigT (fun Y : D.(object)
+      => 
+      sigT (fun f: X ~> G.(fmap) Y 
+      => 
+      sigT (fun fsharp : F.(fmap)X ~> Y 
+      => 
+      f ≈ G.(fmap_arr) fsharp ∘ adjunct_trans.(eta_t) X
+      )));
+  (* TODO require that the above fsharp is unique *)
 }.

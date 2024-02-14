@@ -1,7 +1,7 @@
 Require Import Nyan.Theory.Category.
 
 Class Monoid : Type := {
-  monoid_X        : Type;
+  monoid_X        : Set;
   monoid_op       : monoid_X -> monoid_X -> monoid_X;
   monoid_id       : monoid_X;
   monoid_assoc    : forall x y z, monoid_op x (monoid_op y z) = monoid_op (monoid_op x y) z;
@@ -181,7 +181,6 @@ Proof. intros. lia. Qed.
   monoid_homo_e   := eq_refl;
   monoid_homo_pre := N_Z_monoid_homo_pre;
 }.
-
 
 Lemma Inclusion_N_Z_monic : monic Inclusion_N_Z.
 Proof.
