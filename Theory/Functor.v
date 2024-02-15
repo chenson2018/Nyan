@@ -1,5 +1,7 @@
 Require Import Nyan.Theory.Category.
 Require Import Nyan.Theory.Ism.
+Require Import Nyan.Theory.Product.
+Require Import Nyan.Theory.Universal.
 Open Scope Cat.
 
 Section functor.
@@ -80,6 +82,35 @@ Defined.
   functor_compose:= fun _ _ _ _ _ => reflexivity _;
   fmap_proper:= Identity_Functor_Proper;
 }.
+
+#[export] Instance Diagonal_Functor (Cat: Category) : Functor Cat (Category_Product Cat Cat) := {
+  fmap := fun A => (A, A);
+  fmap_arr := fun _ _ f => (f, f);
+  functor_id := fun _ => conj (reflexivity _) (reflexivity _);
+  functor_compose := fun _ _ _ _ _ => conj (reflexivity _) (reflexivity _);
+  fmap_proper := fun _ _ _ _ H => conj H H;
+}.
+
+Section prod_func.
+  Context (Cat : Category).
+  Variable H : forall A B : Cat.(object), Product A B.
+
+  #[export] Program Instance Product_Functor : Functor (Category_Product Cat Cat) Cat := {
+    fmap := fun AB => (H (fst AB) (snd AB)).(p_AxB);
+  }.
+
+  Next Obligation.
+  Admitted.
+
+  Next Obligation.
+  Admitted.
+
+  Next Obligation.
+  Admitted.
+
+  Next Obligation.
+  Admitted.
+End prod_func.
 
 Class Natural_Transformation {C D: Category} (F G : Functor C D) := {
   eta_t (A : C.(object)): F.(fmap) A ~> G.(fmap) A;

@@ -53,9 +53,7 @@ Proof.
   - apply terminal_unique_T.
 Qed.
 
-Class Product {Cat: Category} := {
-  p_A   : object;
-  p_B   : object;
+Class Product {Cat: Category} (p_A p_B : Cat.(object)) := {
   p_C   : object;
   p_AxB : object;
   p_f   : p_C ~> p_A;
@@ -68,9 +66,7 @@ Class Product {Cat: Category} := {
   pi_2_comm : pi_2 ∘ p_med ≈ p_g;
 }.
 
-Class CoProduct {Cat: Category} := {
-  cop_A   : object;
-  cop_B   : object;
+Class CoProduct {Cat: Category} (cop_A cop_B: Cat.(object)) := {
   cop_C   : object;
   cop_ApB : object;
   cop_f   : cop_A ~> cop_C;
